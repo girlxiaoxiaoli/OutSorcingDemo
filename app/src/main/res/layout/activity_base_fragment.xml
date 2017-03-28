@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zz.guojin.outsorcingdemo.BaseFragmentActivity">
+    <include layout="@layout/toolsbar"></include>
+
+    <RadioGroup
+        android:id="@id/raduo_group"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@id/raduo_btn1"
+            style="@style/base_radiobutton"
+            android:text="tab1"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@id/raduo_btn2"
+            style="@style/base_radiobutton"
+            android:text="tab2" />
+
+        <RadioButton
+            android:id="@id/raduo_btn3"
+            style="@style/base_radiobutton"
+            android:text="tab3"
+            />
+    </RadioGroup>
+    <FrameLayout
+        android:id="@id/fragmentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+</LinearLayout>

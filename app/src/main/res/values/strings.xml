@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">OutSorcingDemo</string>
+    <string name="title_activity_base_fragment">BaseFragmentActivity</string>
+</resources>
