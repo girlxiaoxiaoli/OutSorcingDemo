@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.zz.guojin.outsorcingdemo.ui.LoginActivity">
 
+    <include layout="@layout/toolsbar" />
+
     <RelativeLayout
+        android:id="@id/layout_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -17,9 +20,14 @@
             android:id="@id/et_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
             android:drawableLeft="@mipmap/passbb"
             android:drawablePadding="10dp"
-            android:hint="请输入账号密码" />
+            android:gravity="center_vertical"
+            android:hint="请输入账号"
+            android:singleLine="true"
+            android:textCursorDrawable="@null" />
 
         <View
             android:id="@id/view"
@@ -30,24 +38,51 @@
             android:layout_marginRight="10dp"
             android:background="#33000000" />
 
+        <!--设置光标的颜色与字体一致-->
+        <!--android:textCursorDrawable="@null"-->
         <EditText
             android:id="@id/et_pwd"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:layout_below="@id/view"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
             android:drawableLeft="@mipmap/userbb"
             android:drawablePadding="10dp"
+            android:gravity="center_vertical"
             android:hint="请输入密码"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textCursorDrawable="@null" />
     </RelativeLayout>
+
     <TextView
+        android:id="@id/login_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/layout_login"
+        android:layout_margin="20dp"
+        android:background="@drawable/login_layout_shape"
+        android:gravity="center"
+        android:text="@string/tv_login" />
+
+    <TextView
+        android:id="@id/forget_login"
         android:layout_width="100dp"
         android:layout_height="30dp"
+        android:layout_alignLeft="@id/layout_login"
+        android:layout_below="@id/login_login"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="忘记密码"/>
+        android:text="忘记密码" />
+
     <TextView
+        android:id="@id/regist_login"
         android:layout_width="100dp"
         android:layout_height="30dp"
+        android:layout_alignRight="@id/layout_login"
+        android:layout_below="@id/login_login"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="注 册"/>
+        android:text="注 册" />
 </RelativeLayout>

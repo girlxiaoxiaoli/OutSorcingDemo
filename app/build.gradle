@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.zz.guojin.outsorcingdemo"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,4 +29,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:+'
     testCompile 'junit:junit:4.12'
     compile 'com.yanzhenjie.nohttp:okhttp:1.1.1'
+    //butterknife
+    compile 'com.jakewharton:butterknife:8.0.0'
+    apt 'com.jakewharton:butterknife-compiler:8.0.0'
+
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+
 }

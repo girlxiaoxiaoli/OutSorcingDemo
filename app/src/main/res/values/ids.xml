@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--toolsbar-->
     <item name="toolbar" type="id"></item>
     <item name="img_back" type="id"></item>
     <item name="title" type="id"></item>
-    <item name="raduo_group" type="id"></item>
-    <item name="raduo_btn1" type="id"></item>
-    <item name="raduo_btn2" type="id"></item>
-    <item name="raduo_btn3" type="id"></item>
-    <item name="raduo_btn4" type="id"></item>
-
-    <item name="fragmentLayout" type="id"></item>
-
+    <item name="second_title" type="id" />
+    <!--loginactiivity-->
     <item name="activity_login" type="id"></item>
+    <item name="layout_login" type="id"></item>
     <item name="et_name" type="id"></item>
-    <item name="et_pwd" type="id"/>
-    <item name="view" type="id"/>
+    <item name="et_pwd" type="id" />
+    <item name="view" type="id" />
+    <item name="login_login" type="id" />
+    <item name="forget_login" type="id" />
+    <item name="regist_login" type="id" />
+
+
+    <!--Mainactivity-->
+    <item name="activity_main" type="id" />
+
+    <!--baselistactivity-->
+    <item name="content_base_list" type="id" />
+    <item name="swipe" type="id" />
+    <item name="recycler" type="id" />
 
 </resources>

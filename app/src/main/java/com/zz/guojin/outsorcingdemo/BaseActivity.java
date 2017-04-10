@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,19 +28,26 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public abstract class BaseActivity extends AppCompatActivity {
     protected Context ctx;
     protected RequestQueue queue;
     protected ProgressDialog pDialog;
     protected Request<String> request;
+    protected Unbinder unbinder;
+    protected String TAG = getClass().getSimpleName();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  //控制屏幕的方向
         ActivityUtils.add(this);
         setContentView(getLayoutResId());
+        unbinder = ButterKnife.bind(this);
         ctx = this;
         queue = NoHttp.newRequestQueue();
         init();
@@ -60,17 +68,29 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initListener();
 
     public void initToolbar(Toolbar toolbar, String title) {
-        initToolbar(toolbar, title, false);
+        initToolbar(toolbar, title, null, false);
     }
 
-    public void initToolbar(Toolbar toolbar, String title, boolean isGoBack) {
+    public void initToolbar(Toolbar toolbar, String title, boolean isGoback) {
+        initToolbar(toolbar, title, null, isGoback);
+
+    }
+
+    public void initToolbar(Toolbar toolbar, String title, String secondTitle, boolean isGoBack) {
         ImageView goback = (ImageView) toolbar.findViewById(R.id.img_back);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.title);
+        TextView tvSecond = (TextView) toolbar.findViewById(R.id.second_title);
         tvTitle.setText(title);
         if (isGoBack) {
             goback.setVisibility(View.VISIBLE);
         } else {
             goback.setVisibility(View.GONE);
+        }
+        if (secondTitle == null) {
+            tvSecond.setVisibility(View.GONE);
+        } else {
+            tvSecond.setVisibility(View.VISIBLE);
+            tvSecond.setText(secondTitle);
         }
 
         goback.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +118,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                                  Boolean isCache,
                                  int requestMethod,
                                  int what) {
-        if (what == 0) {
+        if (requestMethod == 0) {
             request = NoHttp.createStringRequest(url, RequestMethod.GET);
 
         } else {
@@ -144,7 +164,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         @Override
         public void onFailed(int what, Response<String> response) {
-           Logger.e(getClass().getName()+"--onFailed---"+response.get());
+            Logger.e(getClass().getName() + "--onFailed---" + response.get());
         }
 
         @Override
@@ -157,22 +177,40 @@ public abstract class BaseActivity extends AppCompatActivity {
         String info = response.get();
         try {
             JSONObject jsonObject = new JSONObject(info);
-            int error = jsonObject.getInt("error");
-            if (error == 0) {
-                Logger.e("加载数据错误！！！！！！");
+            String error = jsonObject.getString("error");
+            switch (error) {
+                case "0":
+                    //请求错误
+                    String msg = jsonObject.getString("msg");
+                    Logger.e(TAG + msg);
+
+                    break;
+                case "1":
+//                        请求成功
+
+                    break;
+                case "3":
+                    //系统故障
+                    String msg1 = jsonObject.getString("msg");
+                    Logger.e(TAG + msg1);
+
+                    break;
             }
         } catch (JSONException e) {
-            Logger.e(getClass().getName() + "-------" + e.getMessage());
+            e.printStackTrace();
         }
-
     }
 
-    public void toStartProgressDialog() {
-        if (pDialog == null) {
-            pDialog = ProgressDialog.show(ctx, null, "Loading...");
-        }
-        if (pDialog != null && !pDialog.isShowing()) {
-            pDialog.isShowing();
+    public abstract void toStartProgressDialog();
+
+    public void toStartProgressDialog(boolean isLoaading) {
+        if (isLoaading) {
+            if (pDialog == null) {
+                pDialog = ProgressDialog.show(ctx, null, "Loading...");
+            }
+            if (pDialog != null && !pDialog.isShowing()) {
+                pDialog.isShowing();
+            }
         }
     }
 
@@ -184,16 +222,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         ActivityUtils.remove(this);
-        if(pDialog!=null && pDialog.isShowing()){
+        if (pDialog != null && pDialog.isShowing()) {
             pDialog.cancel();
-            pDialog=null;
+            pDialog = null;
         }
-        if(queue!=null){
+        if (queue != null) {
             request.cancelBySign(getClass().getName());
             queue.cancelBySign(getClass().getName());
-            queue=null;
+            queue = null;
         }
-        super.onDestroy();
+        unbinder.unbind();
+
     }
 }

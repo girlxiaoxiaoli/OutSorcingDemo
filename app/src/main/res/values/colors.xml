@@ -8,5 +8,14 @@
     <color name="colorTheme">#F86B3E</color>
     <color name="textcolor">#6f6f70</color>
     <color name="gray">#cccccc</color>
+    <color name="blue">#3579f4</color>
+    <color name="orange">#d4762c</color>
+    <color name="green">#8fbe3a</color>
+    <color name="red2">#e13d5d</color>
+    <color name="orange2">#dc7f38</color>
+    <color name="green3">#48f2a9</color>
+    <color name="grey2">#c5c5c5</color>
+    <color name="yellow">#e2b73d</color>
+    <color name="pink">#c5c5f3</color>
 
 </resources>

@@ -26,15 +26,15 @@
             android:textSize="@dimen/sp_25"
             android:textColor="@color/colorWhite"/>
 
-        <!--<TextView-->
-            <!--android:id="@id/second_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:textSize="@dimen/sp_15"-->
-            <!--android:textColor="@color/colorWhite"-->
-            <!--android:text="副标题"/>-->
+        <TextView
+            android:id="@id/second_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/colorWhite"
+            android:text="副标题"/>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

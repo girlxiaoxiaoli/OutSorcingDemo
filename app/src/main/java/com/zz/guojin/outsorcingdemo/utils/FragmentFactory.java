@@ -2,6 +2,8 @@ package com.zz.guojin.outsorcingdemo.utils;
 
 import android.support.v4.app.Fragment;
 
+import com.yanzhenjie.nohttp.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +36,7 @@ public class FragmentFactory {
     public static Fragment create(int position,Fragment fragment) {
         // 先在缓存中取
         if (fragmentMap.get(position) == null){
-            LogUtils.e("position ："+position," 工厂里面打印的  当前为空");
+            Logger.e("position ："+position+" 工厂里面打印的  当前为空");
         }
         fragment = fragmentMap.get(position);
         //取不到 就重新创建
